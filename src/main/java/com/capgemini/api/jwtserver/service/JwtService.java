@@ -1,5 +1,6 @@
 package com.capgemini.api.jwtserver.service;
 
+import com.capgemini.api.jwtserver.controller.dto.JwksResponse;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -75,9 +76,11 @@ public class JwtService {
         return jws.getCompactSerialization();
     }
 
-    public String getJwks() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public JwksResponse getJwks() throws IOException {
+//        ObjectMapper objectMapper = new ObjectMapper();
 
-     return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rsaJsonWebKey.toParams(JsonWebKey.OutputControlLevel.INCLUDE_SYMMETRIC));
+        JwksResponse jwksResponse = new JwksResponse();
+        jwksResponse.getKeys().add(rsaJsonWebKey.toParams(JsonWebKey.OutputControlLevel.INCLUDE_SYMMETRIC));
+        return jwksResponse;
     }
 }

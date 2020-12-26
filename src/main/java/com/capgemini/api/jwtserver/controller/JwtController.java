@@ -1,5 +1,6 @@
 package com.capgemini.api.jwtserver.controller;
 
+import com.capgemini.api.jwtserver.controller.dto.JwksResponse;
 import com.capgemini.api.jwtserver.controller.dto.TokenRequest;
 import com.capgemini.api.jwtserver.service.JwtService;
 import org.jose4j.lang.JoseException;
@@ -27,7 +28,7 @@ public class JwtController {
     }
 
     @GetMapping (value = "/jwks.json", produces = APPLICATION_JSON_VALUE)
-    public String getJwks(TokenRequest request) throws IOException {
+    public JwksResponse getJwks(TokenRequest request) throws IOException {
         return jwtService.getJwks();
     }
 }
